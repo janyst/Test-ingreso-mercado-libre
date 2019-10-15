@@ -1,0 +1,14 @@
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:231] straightLine(clima perfecto) puntoA(XY): 0.0;1000.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:232] straightLine(clima perfecto) puntoB(XY): 0.0;-500.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:233] straightLine(clima perfecto) puntoC(XY): 0.0;0.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:237] straightLine(sequia) puntoA(XY): 0.0;1000.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:238] straightLine(sequia) puntoB(XY): 0.0;-500.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:239] straightLine(sequia) puntoC(XY): 0.0;0.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:214] SunnyDay puntoA(XY): 0.0;1000.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:215] SunnyDay puntoB(XY): 0.0;-500.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:216] SunnyDay puntoC(XY): 0.0;0.0
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:62] el typo de clima es: com.ar.ml.weather.planet.model.SummaryDay@1ff8b8f
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:193] rainDay puntoA(XY): -766.04;642.79
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:194] rainDay puntoB(XY): 441.47;-234.74
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:195] rainDay puntoC(XY): 209.06;209.06
+[2019-10-15 16:43:47] [ INFO ] [WeatherPlanetHelper:62] el typo de clima es: com.ar.ml.weather.planet.model.SummaryDay@c39f790
