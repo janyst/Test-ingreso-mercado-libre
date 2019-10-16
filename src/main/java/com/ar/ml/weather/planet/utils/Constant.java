@@ -32,5 +32,6 @@ public class Constant {
 	
 	public static final String ERROR_MESSAGE_BAD_REQUEST = "Datos incorrectos, por favor validar su solicitud.";
 	public static final String ERROR_MESSAGE_UNAUTHORIZED = "Civilizacion no autorizada.";
-	public static final String MESSAGE_OK_RAIN = "Maximo dia de lluvia: ";
+	public static final String MESSAGE_OK_RAIN = "Dias de maxima precipitacion: ";
+	public static final String NO_MESSAGE_OK_RAIN = "No tenemos dias de precipitacion";
 }

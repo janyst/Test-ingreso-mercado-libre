@@ -6,6 +6,7 @@ import com.ar.ml.weather.planet.utils.Constant;
 
 public class Factory {
 	public static FactoryImpl factoryImpl;
+	public static boolean executeJob;
 	
 	public static FactoryImpl getFactory() {
 		if(factoryImpl == null) {
@@ -18,4 +19,13 @@ public class Factory {
 		}
 		return factoryImpl;
 	}
+
+	public static boolean isExecuteJob() {
+		return executeJob;
+	}
+
+	public static void setExecuteJob(boolean executeJob) {
+		Factory.executeJob = executeJob;
+	}
+	
 }

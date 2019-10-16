@@ -24,9 +24,10 @@ public class FactoryDao {
 	* trunca tablas, registra la informacion del clima por dia.
 	* @author A704945
 	*/
-	public void getRegister (List<SummaryDay> lisSummaryDays) {
+	public boolean getRegister (List<SummaryDay> lisSummaryDays) {
 		PreparedStatement preparedStatement = null;
 		String[] arrySql = null;
+		boolean flag = false;
 		
 		try{
 			arrySql = this.getSQL(lisSummaryDays);
@@ -42,11 +43,13 @@ public class FactoryDao {
 				logger.info("insert SUMMARY_WEATHER "+arrySql[0]);
 				logger.info("insert RAIN_DAY "+arrySql[1]);
 				this.getClose();
+				flag = true;
 			}			
 		}catch (Exception e) {
 			e.printStackTrace();
 			logger.error("no podimos ejecutar transacciones en BD", e);
 		}
+		return flag;
 	}
 	
 	/**

@@ -4,11 +4,20 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.log4j.Logger;
+import org.quartz.CronScheduleBuilder;
+import org.quartz.JobBuilder;
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerException;
+import org.quartz.Trigger;
+import org.quartz.TriggerBuilder;
+import org.quartz.impl.StdSchedulerFactory;
 
 import com.ar.ml.weather.planet.dto.ConsultResponseDTO;
+import com.ar.ml.weather.planet.dto.InformationDTO;
 import com.ar.ml.weather.planet.dto.SummaryDTO;
 import com.ar.ml.weather.planet.helper.WeatherPlanetHelper;
-import com.ar.ml.weather.planet.model.Planet;
+import com.ar.ml.weather.planet.jobs.WeatherJob;
 import com.ar.ml.weather.planet.model.SummaryDay;
 import com.ar.ml.weather.planet.utils.Constant;
 import com.ar.ml.weather.planet.utils.Utility;
@@ -42,6 +51,8 @@ public class FactoryImpl {
 			status = Response.Status.OK;
 			logger.info("Respuesta OK, "+summaryDay.toString());
 		}
+		if(!Factory.isExecuteJob())
+			triggerJob();
 		return Response.status(status).entity(conDto).build();
 	}
 	
@@ -53,6 +64,7 @@ public class FactoryImpl {
 	public Response summaryDay(String namePlanet) {
 		Status status = null;
 		SummaryDTO summaryDTO = null;
+		InformationDTO informationDTO = null;
 		String msg = null;
 			
 		if(!Utility.validateNamePlanet(namePlanet)) {
@@ -66,17 +78,39 @@ public class FactoryImpl {
 			summaryDTO.setMsg(msg);
 			logger.info("Respuesta OK, "+summaryDTO.toString());
 		}
+		if(!Factory.isExecuteJob())
+			triggerJob();
 		return Response.status(status).entity(summaryDTO).build();
+	}
+	
+	/**
+	* <h1>dispara el jobs</h1>
+	* el metodo llama el tarea que se ejecutara 1 vez al dia.
+	* @author A704945
+	*/
+	public void triggerJob() {
+		logger.info("corremos proceso de jobs");
+		JobDetail job = JobBuilder.newJob(WeatherJob.class).build();//tarea		
+		CronScheduleBuilder scheduleBuilder = CronScheduleBuilder.cronSchedule("0 0 0 ? * * *");//time
+		Trigger trigger = TriggerBuilder.newTrigger().withSchedule(scheduleBuilder).build();
+		
+		Scheduler scheduler;
+		try {
+			scheduler = new StdSchedulerFactory().getScheduler();
+			scheduler.start();
+			scheduler.scheduleJob(job, trigger);
+		} catch (SchedulerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	* <h1>busca el clima de 10 años.</h1>
 	* @author A704945
 	*/
-	public void jobsTenYears(int days) {
-		Status status = null;
-		SummaryDTO summaryDTO = null;
-		String msg = null;
+	public boolean weatherTenYears(int days) {
+		return weatherPlanetHelper.executeJobs(days);
 	}
 	
 	public WeatherPlanetHelper getWeatherPlanetHelper() {

@@ -78,7 +78,7 @@ public class WeatherPlanetHelper {
 		SummaryDTO summaryDTO = new SummaryDTO();
 		
 		factoryDao = new FactoryDao();
-		//listDao = factoryDao.getSummaryDay();
+		listDao = factoryDao.getSummaryDay();
 		if(listDao != null && !listDao.isEmpty()) {
 			logger.info("la lista posee valor");
 			summaryDTO.setItemRain(new ArrayList<SummaryDay>());
@@ -156,14 +156,18 @@ public class WeatherPlanetHelper {
 			}
 		}
 		return summaryDTO;
-	}
+	}	
 	
-	public void executeJobs() {
+	/**
+	* <h1>guarda en BD el registro por 10 años</h1>
+	* @author A704945
+	*/
+	public boolean executeJobs(int days) {
+		boolean flag = false;
 		FactoryDao factoryDao = null;
-		int years = 10*365;
 		List<SummaryDay> listRegister = null;
 		SummaryDTO listPartial = null;
-		listPartial = this.getListSummaryWeather(years);
+		listPartial = this.getListSummaryWeather(days);
 		if(!listPartial.getItemRain().isEmpty() || !listPartial.getItemDrought().isEmpty() 
 				|| !listPartial.getItemPerfect().isEmpty()) {
 			listRegister = new ArrayList<SummaryDay>();
@@ -172,8 +176,9 @@ public class WeatherPlanetHelper {
 			listRegister.addAll(listPartial.getItemPerfect());
 			
 			factoryDao = new FactoryDao();
-			//factoryDao.getRegister(listRegister);
+			flag = factoryDao.getRegister(listRegister);
 		}
+		return flag;
 	}
 	
 	
